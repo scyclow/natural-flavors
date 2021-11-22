@@ -27,7 +27,7 @@ function Redirect() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/natural-flavors' : '/'}>
       <ScrollToTop />
       <Routes>
         <Route
