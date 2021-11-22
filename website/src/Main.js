@@ -114,13 +114,13 @@ export default function Main() {
       </section>
 
       <section className={`thumbnailGrid ${gridSizeClasses[gridSize]}`}>
-        {/*
+        {
           sortedData
             .map((d, i) => <div><ThumbnailLocal id={d.id} key={d.id} /></div>)
-        */}
-        {
-          times(5, i => <div><Thumbnail id={i} key={i} /></div>)
         }
+        {/*
+          times(5, i => <div><Thumbnail id={i} key={i} /></div>)
+        */}
       </section>
 
     </div>
