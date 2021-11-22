@@ -1,43 +1,57 @@
 
 import './App.css';
 
-import {
-  NFTDataContext,
-  NFTPreview,
-  NFTFullPage,
-  PreviewComponents,
-} from "@zoralabs/nft-components";
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+
+import Main from './Main'
+import Page from './Page'
+
+
+export function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function Redirect() {
+  const l = useLocation()
+  debugger
+  return null
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-          Losers
-        </h1>
-      </header>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path="/packets/:id"
+          element={
+            <Page />
+          }
+        />
 
-      <NFTPreview
-        id="44000044"
-        contract="0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270"
-        showBids
-        showPerpetual
-        // initialData={token}
-        // useBetaIndexer={true}
-        // key={`${tokenInfo.tokenContract}-${tokenInfo.tokenId}`}
-      >
-        <div className="owned-list-item">
-          <PreviewComponents.MediaThumbnail />
+        <Route
+          exact
+          path="/"
+          element={
+            <Main />
+          }
+        />
 
-        </div>
-      </NFTPreview>
-
-      <NFTFullPage
-        id="44000044"
-        contract="0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270"
-      />
-    </div>
-  );
+        {/*<Route path="/" render={() => <Redirect />} />*/}
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;
+
+
+

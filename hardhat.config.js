@@ -2,7 +2,7 @@
 require("@nomiclabs/hardhat-waffle")
 require("hardhat-gas-reporter");
 
-const STUFF = require('./stuff.json')
+const STUFF = require('../DEV_KEYS/stuff.json')
 
 module.exports = {
   solidity: {
@@ -13,15 +13,15 @@ module.exports = {
   networks: {
     mumbai: {
       url: STUFF.POLYGON_MUMBAI_URL,
-      accounts: [`0x${STUFF.ACCOUNT}`]
+      accounts: [`0x${STUFF.DEV1}`]
     },
     rinkeby: {
       url: STUFF.ETH_RINKEBY_URL,
-      accounts: [`0x${STUFF.ACCOUNT}`]
+      accounts: [`0x${STUFF.DEV1}`]
     },
     goerli: {
       url: STUFF.ETH_GOERLI_URL,
-      accounts: [`0x${STUFF.ACCOUNT}`]
+      accounts: [`0x${STUFF.DEV1}`]
     }
   },
 

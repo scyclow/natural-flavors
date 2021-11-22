@@ -1,28 +1,25 @@
+async function main() {
+    const [deployer] = await ethers.getSigners();
+
+    const NaturalFlavors = await ethers.getContractFactory('NaturalFlavors', deployer);
+
+    const naturalFlavorsContract = await NaturalFlavors.deploy(
+      'ipfs://bafybeicsnpw5rn77326e6j245knn6eecqe3bt2vhvtveggwrwzkeifhzqm/',
+      '',
+      '',
+      '',
+      '',
+      '',
+    );
+    await naturalFlavorsContract.deployed();
 
 
-async function main(contractType) {
-  const [owner] = await ethers.getSigners();
+    console.log(naturalFlavorsContract.address)
 
-
-  Prizes = await ethers.getContractFactory('Prizes', owner);
-
-  PrizesContract = await Prizes.deploy();
-  await PrizesContract.deployed();
-
-  const mints = []
-  for (let i = 0; i < 50; i++) {
-    mints.push(owner.address)
-  }
-
-  await PrizesContract.connect(owner).batchSafeMint(mints)
-
-  console.log(`Prizes Contract Address: ${PrizesContract.address}`)
 
 }
 
-
-
-main(process.env.CONTRACT)
+main()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);

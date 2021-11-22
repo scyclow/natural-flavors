@@ -1,9 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-  background: #181818;
-  color: #f4f5e4;
+
+  color: #221c17;
   font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Cutive Mono', monospace;
+  /*font-family: 'Lato', monospace;*/
+
 }
 
 
+body {
+  background-color: #bababc;
+  background-image: url('./bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
