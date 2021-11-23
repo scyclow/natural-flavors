@@ -10,111 +10,88 @@ import {
   PreviewComponents,
 } from "@zoralabs/nft-components";
 import { useNFT, useNFTIndexerQuery } from '@zoralabs/nft-hooks'
-import tokenData from './data'
+import localTokenData from './data'
 import { Link } from 'react-router-dom'
 
 import { MediaFetchAgent, Networks } from '@zoralabs/nft-hooks'
-// import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
-// const TOKEN_QUERY = gql`
+const AUCTION_QUERY = gql`
+query Tokens($contract: String!) {
+  Token(where: { address: { _eq: $contract } }){
+    tokenId
+    auctions(order_by: { expiresAt: desc } limit: 1) {
+      status
+      lastBidAmount
+      reservePrice
+      expiresAt
+      duration
+    }
+  }
+}
+`
 
-//   fragment CurrencyShort on Currency {
-//     id
-//     name
-//     symbol
-//     decimals
-//   }
-
-//   fragment PreviousReserveBid on InactiveReserveAuctionBid {
-//     id
-//     bidder {
-//       id
-//     }
-//     transactionHash
-//     createdAtTimestamp
-//     amount
-//     bidType
-//     bidInactivatedAtTimestamp
-//     bidInactivatedAtBlockNumber
-//   }
-
-//   fragment CurrentReserveBid on ReserveAuctionBid {
-//     bidType
-//     amount
-//     transactionHash
-//     createdAtTimestamp
-//     bidder {
-//       id
-//     }
-//   }
-
-//   fragment ReserveAuctionPartial on ReserveAuction {
-//     id
-//     tokenId
-//     tokenContract
-//     transactionHash
-//     status
-//     approved
-//     reservePrice
-//     firstBidTime
-//     token
-//     createdAtTimestamp
-//     approvedTimestamp
-//     curator {
-//       id
-//     }
-//     curatorFeePercentage
-//     tokenOwner {
-//       id
-//     }
-//     auctionCurrency {
-//       ...CurrencyShort
-//     }
-//     currentBid {
-//       ...CurrentReserveBid
-//     }
-//     previousBids {
-//       ...PreviousReserveBid
-//     }
-//     duration
-//     expectedEndTimestamp
-//     finalizedAtTimestamp
-//   }
-
-
-//   query getAuctionByMedia($tokens: [String!]) {
-//     reserveAuctions(
-//       first: 300
-//       where: { token_in: $tokens }
-//       orderBy: createdAtTimestamp
-//       orderDirection: desc
-//     ) {
-//       ...ReserveAuctionPartial
-//     }
-//   }
-// `
-
-const brands = Array.from(tokenData.reduce((set, token) => set.add(token.attributes[0].value), new Set()))
-const packetStates = Array.from(tokenData.reduce((set, token) => set.add(token.attributes[2].value), new Set()))
-const condiments = Array.from(tokenData.reduce((set, token) => set.add(token.attributes[1].value), new Set()))
-const orientations = Array.from(tokenData.reduce((set, token) => set.add(token.attributes[3].value), new Set()))
+const brands = Array.from(localTokenData.reduce((set, token) => set.add(token.attributes[0].value), new Set()))
+const packetStates = Array.from(localTokenData.reduce((set, token) => set.add(token.attributes[2].value), new Set()))
+const condiments = Array.from(localTokenData.reduce((set, token) => set.add(token.attributes[1].value), new Set()))
+const orientations = Array.from(localTokenData.reduce((set, token) => set.add(token.attributes[3].value), new Set()))
 
 const compareLowestBid = (a, b) => {
-  const bBid = b.status === 'RESERVE_AUCTION_PENDING' ? 0.1001 : Number(b.currentBid || 9999)
-  const aBid = a.status === 'RESERVE_AUCTION_PENDING' ? 0.1001 : Number(a.currentBid || 9999)
+  const bBid = b.status === 'APPROVED' ? 0.1001 : Number(b.currentBid || 9999)
+  const aBid = a.status === 'APPROVED' ? 0.1001 : Number(a.currentBid || 9999)
 
   return aBid - bBid
 }
 
+const compareHighestBid = (a, b) => {
+  const bBid = b.status === 'APPROVED' ? 0.0999 : Number(b.currentBid || 0)
+  const aBid = a.status === 'APPROVED' ? 0.0999 : Number(a.currentBid || 0)
+
+  return bBid - aBid
+}
+
+const combineData = (localData, auctionData) => {
+  return localData.map(l => {
+    const matchingAuctionData = auctionData.find(a => a.tokenId === l.tokenId)
+
+    const auction = matchingAuctionData?.auctions?.[0] || {}
+
+    const currentBid = auction.lastBidAmount
+      ? Number(auction.lastBidAmount.substring(0, auction.lastBidAmount.length - 15)) / 1000
+      : null
+
+    return {
+      ...l,
+      currentBid,
+      endTime: auction.expiresAt && new Date(auction.expiresAt).getTime(),
+      status: auction.status
+    }
+  })
+}
+
 const compareEndingSoon = (a, b) => {
   if (b.endTime && a.endTime) {
-    return  Number(a.endTime) - Number(b.endTime)
+    return a.endTime - b.endTime
   }
 
   if (a.endTime) {
     return -1
   }
   return compareLowestBid(a, b)
+}
+
+const getTimes = (endTime) => {
+  const now = Date.now()
+  const diff = ((endTime||0) - now)
+  const h = (diff / 86400000) * 24
+  const m = (h - Math.floor(h)) * 60
+  const s = (m - Math.floor(m)) * 60
+
+  return {
+    h: Math.floor(h),
+    m: Math.floor(m),
+    s: Math.floor(s),
+  }
 }
 
 export default function Main() {
@@ -125,27 +102,18 @@ export default function Main() {
   const [gridSize, setGridSize] = useState('large')
   const [sortOrder, setSortOrder] = useState('endingSoon')
 
-  // const { loading, error, data } = useQuery(TOKEN_QUERY, {
-  //   variables: {
-  //     tokens: times(4, id => `${window.CONTRACT_ADDR}-${id}`)
-  //   },
-  // })
+  const { loading, error, data: apiData } = useQuery(AUCTION_QUERY, {
+    variables: {
+      contract: window.CONTRACT_ADDR
+    },
+  })
 
-  // if (loading) return 'Loading...'
-  // if (error) {
-  //   console.log(JSON.stringify(error))
-  //   return JSON.stringify(error)
-  // }
-  // console.log(data)
-  // return ''
 
-  const indexerQuery = useNFTIndexerQuery({ collectionAddresses: [window.CONTRACT_ADDR]})
-
-  console.log(indexerQuery)
-
-  const naturalFlavorsData = useNaturalFlavorsData()
-  console.log(naturalFlavorsData)
-
+  if (loading) return 'Loading...'
+  if (error) {
+    console.log(JSON.stringify(error))
+    return JSON.stringify(error)
+  }
 
 
   const gridSizeClasses = {
@@ -155,7 +123,8 @@ export default function Main() {
     large: 'thumbnailGridLarge',
   }
 
-  const filteredData = naturalFlavorsData.data
+
+  const filteredData = combineData(localTokenData, apiData.Token)
     .filter(d => {
       if (selectedBrand && d.attributes.find(a => a.trait_type === 'Brand')?.value !== selectedBrand) return false
       if (selectedPacketState && d.attributes.find(a => a.trait_type === 'Packet State')?.value !== selectedPacketState) return false
@@ -164,6 +133,8 @@ export default function Main() {
       return true
     })
 
+
+
   let sortedData = filteredData
 
 
@@ -171,6 +142,8 @@ export default function Main() {
     sortedData = filteredData.sort(compareEndingSoon)
   } else if (sortOrder === 'lowestBid') {
     sortedData = filteredData.sort(compareLowestBid)
+  } else if (sortOrder === 'highestBid') {
+    sortedData = filteredData.sort(compareHighestBid)
   }
 
 
@@ -235,6 +208,7 @@ export default function Main() {
               <option value="tokenID">Token ID</option>
               <option value="endingSoon">Ending Soon</option>
               <option value="lowestBid">Lowest Bid</option>
+              <option value="highestBid">Highest Bid</option>
             </select>
           </div>
 
@@ -243,10 +217,10 @@ export default function Main() {
 
       <section className={`thumbnailGrid ${gridSizeClasses[gridSize]}`}>
         {
-          sortedData.map((d, i) => <div><Thumbnail data={d} key={d.id} /></div>)
+          sortedData.map((d, i) => <div><Thumbnail data={d} key={d.tokenId} /></div>)
         }
         {/*
-          sortedData.map((d, i) => <div><ThumbnailLocal data={d} key={d.id} /></div>)
+          sortedData.map((d, i) => <div><ThumbnailLocal data={d} key={d.tokenId} /></div>)
           times(6, i => <div><Thumbnail id={i} key={i} /></div>)
         */}
       </section>
@@ -263,27 +237,20 @@ const fmt = (n) => {
 function Thumbnail({ data }) {
   const endTimeSet = !!data?.endTime
 
-  const now = Math.floor(Date.now()/1000)
-  const diff = (Number(data?.endTime) - now)
-  const h = (diff / 86400) * 24
-  const m = (h - Math.floor(h)) * 60
-  const s = (m - Math.floor(m)) * 60
+  const { h, m, s } = getTimes(data?.endTime)
 
-  const [hours, setHours] = useState(endTimeSet ? Math.floor(h) : 0)
-  const [minutes, setMinutes] = useState(endTimeSet ? Math.floor(m) : 0)
-  const [seconds, setSeconds] = useState(endTimeSet ? Math.floor(s) : 0)
+
+  const [hours, setHours] = useState(endTimeSet ? h : 0)
+  const [minutes, setMinutes] = useState(endTimeSet ? m : 0)
+  const [seconds, setSeconds] = useState(endTimeSet ? s : 0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const now = Math.floor(Date.now()/1000)
-      const diff = (Number(data?.endTime) - now)
-      const h = (diff / 86400) * 24
-      const m = (h - Math.floor(h)) * 60
-      const s = (m - Math.floor(m)) * 60
+      const { h, m, s } = getTimes(data?.endTime)
 
-      setHours(Math.floor(h))
-      setMinutes(Math.floor(m))
-      setSeconds(Math.floor(s))
+      setHours(h)
+      setMinutes(m)
+      setSeconds(s)
     }, 1000)
 
     return () => clearInterval(interval)
@@ -294,26 +261,26 @@ function Thumbnail({ data }) {
   const isVertical = data?.attributes?.find(a => a.trait_type === 'Orientation')?.value === 'Vertical'
 
   let details
-  if (data?.status === 'RESERVE_AUCTION_ACTIVE') {
+  if (data?.status === 'IN_PROGRESS') {
     details = (
       <div>
-        <div>Current Bid: {data?.currentBid}</div>
+        <div>Current Bid: {data?.currentBid} ETH</div>
         <div>Time Left: {fmt(hours)}:{fmt(minutes)}:{fmt(seconds)}</div>
       </div>
     )
-  } else if (data?.status === 'RESERVE_AUCTION_PENDING') {
+  } else if (data?.status === 'APPROVED') {
     details = <div>Reserve: 0.1 ETH</div>
   }
 
 
 
   return (
-    <Link to={`/packets/${data.id}`} style={{ textAlign: 'center' }}>
+    <Link to={`/packets/${data.tokenId}`} style={{ textAlign: 'center' }}>
       <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`}>
-        <img src={`./assets/${data.id}.jpg`} loading="lazy" />
+        <img src={`./assets/${data.tokenId}.jpg`} loading="lazy" />
         <div className="ThumbnailDescription">
-          ({data.id})
-          <div>{data?.name || `Packet #${data.id}`}</div>
+          ({data.tokenId})
+          <div>{data?.name || `Packet #${data.tokenId}`}</div>
           {details}
         </div>
         <div className="thumbnailClickPrompt">View ></div>
@@ -330,7 +297,7 @@ function ThumbnailLocal({ id }) {
       <div className="Thumbnail">
         <img src={`./assets/${id}.jpg`} />
         <div className="ThumbnailDescription">
-          <div>{tokenData[id].name}</div>
+          <div>{localTokenData[id].name}</div>
           <div>Current Bid: 0.2 ETH</div>
           <div>Time Remaining: 12:19:57</div>
         </div>
