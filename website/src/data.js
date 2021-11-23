@@ -27,7 +27,7 @@ export default [
     id: 3,
     condiment: 'Ketchup',
     brand: `Sysco/Heinz`,
-    packetState: 'Empty',
+    packetState: 'Splattered',
     orientation: 'Vertical',
   },
   {

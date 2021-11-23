@@ -1,17 +1,22 @@
 
 header {
   text-align: center;
+  margin-top: 2em;
+  margin-bottom: 4em;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Open Sans', sans-serif;
   font-family: 'Lato', sans-serif;
   font-weight: 700;
-  font-size: 5em;
-
   text-shadow: 0 0 2px #302727;
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: 5em;
+}
+h2 {
+  font-size: 2em;
 }
 
 .center {
@@ -33,13 +38,20 @@ h1 {
   max-height: 700px;
 }
 
+.ThumbnailVertical {
+  width: 75%;
+}
+
 .ThumbnailDescription {
   padding: 0.5em;
   text-align: center;
 }
 
 label {
-  margin: 0.25em 0;
+  text-align: center;
+  margin-top: 0.75em;
+  margin-bottom: 0.25em;
+  font-size: 0.8em;
 }
 select {
   cursor: pointer;
@@ -47,6 +59,7 @@ select {
 
 .filterPanel {
   padding: 1em;
+  padding-top: 0.25em;
   border:  1px solid;
   margin: auto;
   margin-bottom: 1em;
@@ -99,4 +112,16 @@ select {
 
 .thumbnailGridLarge {
   grid-template-columns: 1fr;
+}
+
+.thumbnailGridLarge .ThumbnailVertical {
+  width: 100%;
+}
+
+.thumbnailClickPrompt {
+  background-color: #221c17;
+  text-align: center;
+  color: #e6f1f3;
+  padding: 0.5em;
+  font-size: 1.25em;
 }
