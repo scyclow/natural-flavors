@@ -28,17 +28,26 @@ export default function Page() {
       </div>
 
       <div class="viewButton">
-        <NFTFullPage
+{/*        <NFTFullPage
           contract={window.CONTRACT_ADDR}
           id={id}
-        />
+        />*/}
       </div>
       <section className="tokenData">
         <div class="viewDetails">
+          <div>
+            {data.attributes.map(a =>
+              <div>
+                {a.trait_type}: {a.value}
+              </div>
+            )}
+          </div>
+{/*
           <NFTFullPage
             contract={window.CONTRACT_ADDR}
             id={id}
           />
+    */}
         </div>
       </section>
 {/*      <section className="tokenData">

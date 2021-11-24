@@ -135,7 +135,8 @@ export default function Main() {
   const [selectedCondiment, setSelectedCondiment] = useState('')
   const [selectedOrientation, setSelectedOrientation] = useState('')
   const [gridSize, setGridSize] = useState('medium')
-  const [sortOrder, setSortOrder] = useState('endingSoon')
+  // const [sortOrder, setSortOrder] = useState('endingSoon')
+  const [sortOrder, setSortOrder] = useState('tokenId')
 
   const { loading, error, data: apiData } = useQuery(AUCTION_QUERY, {
     variables: {
@@ -193,7 +194,7 @@ export default function Main() {
       </header>
 
       <section>
-        <h2 style={{ margin: '2em 0 ', textAlign: 'center', padding: '1em' }}>Auctions will begin 11/29</h2>
+        <h2 style={{ margin: '2em 0 ', textAlign: 'center', padding: '1em' }}>Auctions will begin on 11/29</h2>
       </section>
 
       <section className="center">
@@ -244,7 +245,7 @@ export default function Main() {
               <option value="large">Large</option>
             </select>
           </div>
-
+{/*
           <div>
             <label>SORT</label>
             <select defaultValue="endingSoon" onChange={e => setSortOrder(e.target.value)}>
@@ -253,7 +254,7 @@ export default function Main() {
               <option value="lowestBid">Lowest Bid</option>
               <option value="highestBid">Highest Bid</option>
             </select>
-          </div>
+          </div>*/}
 
         </div>
       </section>
@@ -311,18 +312,18 @@ function Thumbnail({ data }) {
   const isVertical = data?.attributes?.find(a => a.trait_type === 'Orientation')?.value === 'Vertical'
 
   let details
-  if (data?.status === 'IN_PROGRESS' && expired) {
-    details = <div>Sold: {data?.currentBid} ETH</div>
-  } else if (data?.status === 'IN_PROGRESS') {
-    details = (
-      <div>
-        <div>Highest Bid: {data?.currentBid} ETH</div>
-        <div>Time Left: {fmt(hours)}:{fmt(minutes)}:{fmt(seconds)}</div>
-      </div>
-    )
-  } else if (data?.status === 'APPROVED') {
-    details = <div>Reserve: 0.1 ETH</div>
-  }
+  // if (data?.status === 'IN_PROGRESS' && expired) {
+  //   details = <div>Sold: {data?.currentBid} ETH</div>
+  // } else if (data?.status === 'IN_PROGRESS') {
+  //   details = (
+  //     <div>
+  //       <div>Highest Bid: {data?.currentBid} ETH</div>
+  //       <div>Time Left: {fmt(hours)}:{fmt(minutes)}:{fmt(seconds)}</div>
+  //     </div>
+  //   )
+  // } else if (data?.status === 'APPROVED') {
+  //   details = <div>Reserve: 0.1 ETH</div>
+  // }
 
 
 
@@ -336,7 +337,8 @@ function Thumbnail({ data }) {
           {details}
           {/*{JSON.stringify(data.attributes)}*/}
         </div>
-        <div className="thumbnailClickPrompt">{data.status && !expired ? 'Bid' : 'View'} ></div>
+        {/*<div className="thumbnailClickPrompt">{data.status && !expired ? 'Bid' : 'View'} ></div>*/}
+        <div className="thumbnailClickPrompt">View ></div>
       </div>
     </Link>
   )
