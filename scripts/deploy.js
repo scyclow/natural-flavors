@@ -5,11 +5,6 @@ async function main() {
 
     const naturalFlavorsContract = await NaturalFlavors.deploy(
       'ipfs://bafybeicsnpw5rn77326e6j245knn6eecqe3bt2vhvtveggwrwzkeifhzqm/',
-      '',
-      '',
-      '',
-      '',
-      '',
     );
     await naturalFlavorsContract.deployed();
 

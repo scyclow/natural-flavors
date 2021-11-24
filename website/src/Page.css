@@ -2,6 +2,21 @@
   padding: 1em;
 }
 
+.Page header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+.Page header a {
+  text-decoration: none;
+}
+
+.Page header a:hover {
+  text-decoration: underline;
+}
+
 .tokenData {
   margin: auto;
   margin-top: 1em;
@@ -15,11 +30,41 @@
 }
 
 .photo {
+  display: flex;
+  justify-content: center;
 }
 .photo img {
-  width: 100%;
+  max-width: 100%;
   max-height: 700px;
+  border: 1px solid;
 }
 
-.zora-fullDescription {
+.zora-fullMediaWrapper, .zora-colectionTagWrapper, .zora-fullTitle {
+  display: none !important;
+}
+
+.viewButton .zora-fullDescription,
+.viewButton .zora-infoContainer,
+.viewButton .zora-fullCreatorOwnerSection {
+  display: none !important;
+}
+
+.viewButton .zora-button {
+  font-size: 3em;
+  padding: 0.65em;
+  transition: 200ms;
+  color: #e6f1f3;
+  background-color: #221c17;
+}
+.viewButton .zora-button:hover {
+  background-color: #463a30;
+}
+
+.viewButton {
+  display: flex;
+  justify-content: center;
+}
+
+.viewDetails .zora-button {
+  display: none !important;
 }

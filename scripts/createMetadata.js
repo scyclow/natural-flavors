@@ -1,9 +1,340 @@
 const fs = require('fs')
 
 
-const metadata = [{"id":0,"name":"Ketchup #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/0","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"McDonald's"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":1,"name":"Ketchup #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/1","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Ketchup"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":2,"name":"Hot Sauce #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/2","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"Frank's RedHot"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":3,"name":"Ketchup #3","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/3","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Sysco/Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":4,"name":"Ketchup #4","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/4","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Red Gold"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":5,"name":"Ketchup #5","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/5","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Hunts"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":6,"name":"Ketchup #6","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/6","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":7,"name":"Hot Sauce #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/7","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"Louisiana"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":8,"name":"Ketchup #7","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/8","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":9,"name":"Grape Jelly #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/9","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Grape Jelly"},{"trait_type":"Brand","value":"Popeye's"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":10,"name":"Ketchup #8","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/10","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Red Gold"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":11,"name":"Ketchup #9","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/11","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Fancy Ketchup"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":12,"name":"Hot Sauce #3","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/12","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"Cholula"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":13,"name":"Mayonnaise #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/13","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Mayonnaise"},{"trait_type":"Brand","value":"Chef's Quality"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":14,"name":"Ketchup #10","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/14","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"McDonald's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":15,"name":"Ketchup #11","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/15","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"McDonald's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":16,"name":"Ketchup #12","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/16","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Chef's Quality"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":17,"name":"Grape Jelly #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/17","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Grape Jelly"},{"trait_type":"Brand","value":"Popeye's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":18,"name":"Hot Sauce #4","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/18","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"YiPin"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":19,"name":"Ketchup #13","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/19","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Chef's Quality"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":20,"name":"Mayonnaise #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/20","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Mayonnaise"},{"trait_type":"Brand","value":"Salad Fresh"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":21,"name":"Ketchup #14","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/21","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Hunts"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":22,"name":"Ketchup #15","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/22","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":23,"name":"Soy Sauce #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/23","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Soy Sauce"},{"trait_type":"Brand","value":"Yamasa"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":24,"name":"Ketchup #16","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/24","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"French's"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":25,"name":"Ketchup #17","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/25","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":26,"name":"Ketchup #18","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/26","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":27,"name":"Ketchup #19","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/27","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"McDonald's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":28,"name":"Sugar #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/28","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Sugar"},{"trait_type":"Brand","value":"Pure Sugar"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":29,"name":"Mustard #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/29","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Mustard"},{"trait_type":"Brand","value":"Salad Fresh"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":30,"name":"Ketchup #20","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/30","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":31,"name":"Ketchup #21","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/31","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Ketchup"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":32,"name":"Ketchup #22","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/32","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"White Castle"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":33,"name":"Ketchup #23","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/33","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Hunts"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":34,"name":"Mustard #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/34","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Mustard"},{"trait_type":"Brand","value":"Flavor Fresh"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":35,"name":"Ketchup #24","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/35","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Chef's Quality"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":36,"name":"Ketchup #25","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/36","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Chef's Quality"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":37,"name":"BBQ Sauce #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/37","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"BBQ Sauce"},{"trait_type":"Brand","value":"McDonald's"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":38,"name":"Ketchup #26","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/38","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"White Castle"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":39,"name":"Ketchup #27","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/39","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":40,"name":"Ketchup #28","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/40","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":41,"name":"Duck Sauce #1","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/41","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Duck Sauce"},{"trait_type":"Brand","value":"YiPin"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":42,"name":"Hot Sauce #5","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/42","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"YiPin"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":43,"name":"Grape Jelly #3","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/43","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Grape Jelly"},{"trait_type":"Brand","value":"Popeye's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":44,"name":"Duck Sauce #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/44","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Duck Sauce"},{"trait_type":"Brand","value":"YiPin"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":45,"name":"Hot Sauce #6","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/45","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"Tabasco"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":46,"name":"Hot Sauce #7","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/46","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Hot Sauce"},{"trait_type":"Brand","value":"Popeye's"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":47,"name":"Ketchup #29","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/47","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Splattered"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":48,"name":"Ketchup #30","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/48","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Heinz"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Vertical"}]},{"id":49,"name":"Ketchup #31","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/49","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Ketchup"},{"trait_type":"Brand","value":"Charleys"},{"trait_type":"Packet State","value":"Empty"},{"trait_type":"Orientation","value":"Horizontal"}]},{"id":50,"name":"Soy Sauce #2","license":"CC BY-NC 4.0","external_url":"https://steviep.xyz/packets/50","description":"As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.","attributes":[{"trait_type":"Condiment","value":"Soy Sauce"},{"trait_type":"Brand","value":"Yamasa"},{"trait_type":"Packet State","value":"Full"},{"trait_type":"Orientation","value":"Horizontal"}]}]
+const count = {}
+
+const metadata = [
+  {
+    condiment: 'Ketchup',
+    brand: `McDonald's`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Ketchup`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `Frank's RedHot`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Sysco/Heinz`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Red Gold`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Hunts`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `Louisiana`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `McDonalds`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Red Gold`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Fancy Ketchup`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `Cholula`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Mayonnaise',
+    brand: `Chef's Quality`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `McDonald's`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Seafood Sauce',
+    brand: `Flavor Fresh`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Grape Jelly',
+    brand: `Popeye's`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Mayonnaise',
+    brand: `Salad Fresh`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Hunts`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Soy Sauce',
+    brand: `Yamasa`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `French's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Soy Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `McDonald's`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Sugar',
+    brand: `Pure Sugar`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Mustard',
+    brand: `Salad Fresh`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Ketchup`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Soy Sauce',
+    brand: `Yamasa`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Hunts`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Mustard',
+    brand: `Flavor Fresh`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'BBQ Sauce',
+    brand: `McDonald's`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `White Castle`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Duck Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Grape Jelly',
+    brand: `Popeye's`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Duck Sauce',
+    brand: `YiPin`,
+    packetState: 'Splattered',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `Tabasco`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Hot Sauce',
+    brand: `Popeye's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `McDonald's`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Charleys`,
+    packetState: 'Empty',
+    orientation: 'Horizontal',
+  },
+
+].map((d, i) => {
+
+  if (!count[d.condiment]) {
+    count[d.condiment] = 1
+  }
+
+  const name = d.condiment + ' #' + count[d.condiment]
+  count[d.condiment]++
+  return {
+    tokenId: String(i),
+    name,
+    license: 'CC BY-NC 4.0',
+    external_url: `https://steviep.xyz/packets/${i}`,
+    description: `As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: "Oh wow, this is a good one!" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ${d.condiment.toLowerCase()} packet is worth hundreds of dollars on the internet.`,
+    attributes: [
+      { trait_type: 'Brand', value: d.brand },
+      { trait_type: 'Condiment', value: d.condiment },
+      { trait_type: 'Packet State', value: d.packetState },
+      { trait_type: 'Orientation', value: d.orientation },
+    ],
+  }
+})
+
+
 metadata.forEach((d, i) => {
-  fs.writeFileSync(`/Users/steviep/Desktop/natural-flavors-test-json/${i}.json`, JSON.stringify({
+  fs.writeFileSync(`../website/public/metadata/${i}.json`, JSON.stringify({
     ...d,
     image: `ipfs://bafybeicu2zlbhvmzwwoeuzvueoca66aphs5gimkj4mtqm7eefcp6bvx2vq/${i}.jpg`
   }, null, 4))

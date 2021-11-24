@@ -8,41 +8,46 @@ export default [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-  {
-    condiment: 'Ketchup',
-    brand: `Ketchup`,
-    packetState: 'Empty',
-    orientation: 'Horizontal',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Frank's RedHot`,
-    packetState: 'Full',
-    orientation: 'Vertical',
-  },
+
   {
     condiment: 'Ketchup',
     brand: `Sysco/Heinz`,
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
+  {
+    condiment: 'Hot Sauce',
+    brand: `Popeye's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+
   {
     condiment: 'Ketchup',
-    brand: `Red Gold`,
-    packetState: 'Full',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Ketchup`,
+    packetState: 'Empty',
     orientation: 'Horizontal',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Hunts`,
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
-    brand: `Heinz`,
+    brand: `McDonalds`,
     packetState: 'Empty',
-    orientation: 'Vertical',
+    orientation: 'Horizontal',
   },
   {
     condiment: 'Hot Sauce',
@@ -56,13 +61,13 @@ export default [
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
   {
-    condiment: 'Grape Jelly',
-    brand: `Popeye's`,
+    condiment: 'Ketchup',
+    brand: `Fancy Ketchup`,
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-
 
   {
     condiment: 'Ketchup',
@@ -70,18 +75,21 @@ export default [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-  {
-    condiment: 'Ketchup',
-    brand: `Fancy Ketchup`,
-    packetState: 'Empty',
-    orientation: 'Horizontal',
-  },
+
   {
     condiment: 'Hot Sauce',
-    brand: `Cholula`,
+    brand: `Frank's RedHot`,
     packetState: 'Full',
     orientation: 'Vertical',
   },
+  {
+    condiment: 'Mustard',
+    brand: `Flavor Fresh`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+
+
   {
     condiment: 'Mayonnaise',
     brand: `Chef's Quality`,
@@ -95,8 +103,8 @@ export default [
     orientation: 'Horizontal',
   },
   {
-    condiment: 'Ketchup',
-    brand: `McDonald's`,
+    condiment: 'Seafood Sauce',
+    brand: `Flavor Fresh`,
     packetState: 'Full',
     orientation: 'Horizontal',
   },
@@ -112,12 +120,14 @@ export default [
     packetState: 'Full',
     orientation: 'Horizontal',
   },
+
   {
     condiment: 'Hot Sauce',
-    brand: `YiPin`,
+    brand: `Tabasco`,
     packetState: 'Full',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Chef's Quality`,
@@ -130,12 +140,14 @@ export default [
     packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
-    brand: `Hunts`,
-    packetState: 'Empty',
-    orientation: 'Vertical',
+    brand: `McDonald's`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Heinz`,
@@ -163,13 +175,14 @@ export default [
   {
     condiment: 'Ketchup',
     brand: `Heinz`,
-    packetState: 'Splattered',
+    packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `McDonald's`,
-    packetState: 'Full',
+    packetState: 'Empty',
     orientation: 'Horizontal',
   },
   {
@@ -196,12 +209,14 @@ export default [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
+
   {
     condiment: 'Ketchup',
     brand: `White Castle`,
-    packetState: 'Splattered',
+    packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Hunts`,
@@ -209,8 +224,8 @@ export default [
     orientation: 'Vertical',
   },
   {
-    condiment: 'Mustard',
-    brand: `Flavor Fresh`,
+    condiment: 'Ketchup',
+    brand: `Red Gold`,
     packetState: 'Full',
     orientation: 'Horizontal',
   },
@@ -233,11 +248,13 @@ export default [
     orientation: 'Vertical',
   },
   {
-    condiment: 'Ketchup',
-    brand: `White Castle`,
-    packetState: 'Empty',
+    condiment: 'Soy Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
     orientation: 'Vertical',
   },
+
+
   {
     condiment: 'Ketchup',
     brand: `Heinz`,
@@ -271,48 +288,17 @@ export default [
 
 
   {
-    condiment: 'Duck Sauce',
-    brand: `YiPin`,
-    packetState: 'Splattered',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Tabasco`,
-    packetState: 'Full',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Popeye's`,
-    packetState: 'Full',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Ketchup',
-    brand: `Heinz`,
-    packetState: 'Splattered',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Ketchup',
-    brand: `Heinz`,
-    packetState: 'Empty',
-    orientation: 'Vertical',
-  },
-  {
     condiment: 'Ketchup',
     brand: `Charleys`,
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
 
-  {
-    condiment: 'Soy Sauce',
-    brand: `Yamasa`,
-    packetState: 'Full',
-    orientation: 'Horizontal',
-  },
+
+
+
+
+
 
 ].map((d, i) => {
 
