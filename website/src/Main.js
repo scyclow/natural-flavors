@@ -129,12 +129,13 @@ const getTimes = (endTime) => {
   }
 }
 
+const defaultGridSize = window.innerWidth < 750 ? 'large' : 'medium'
 export default function Main() {
   const [selectedBrand, setSelectedBrand] = useState('')
   const [selectedPacketState, setSelectedPacketState] = useState('')
   const [selectedCondiment, setSelectedCondiment] = useState('')
   const [selectedOrientation, setSelectedOrientation] = useState('')
-  const [gridSize, setGridSize] = useState('medium')
+  const [gridSize, setGridSize] = useState(defaultGridSize)
   // const [sortOrder, setSortOrder] = useState('endingSoon')
   const [sortOrder, setSortOrder] = useState('tokenId')
 
@@ -237,8 +238,8 @@ export default function Main() {
 
 
           <div>
-            <label>SIZE</label>
-            <select defaultValue="medium" onChange={e => setGridSize(e.target.value)}>
+            <label>GRID SIZE</label>
+            <select defaultValue={defaultGridSize} onChange={e => setGridSize(e.target.value)}>
               <option value="xs">Extra Small</option>
               <option value="small">Small</option>
               <option value="medium">Medium</option>
