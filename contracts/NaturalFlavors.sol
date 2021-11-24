@@ -35,7 +35,6 @@ contract NaturalFlavors is ERC721, ERC721Burnable, Ownable {
   uint public royaltyBasisPoints;
 
   mapping(uint256 => string) public tokenIdToMetadata;
-  mapping(uint256 => bool) public metadataIsJson;
 
   event ProjectEvent(address indexed poster, string indexed eventType, string content);
   event TokenEvent(address indexed poster, uint256 indexed tokenId, string indexed eventType, string content);
@@ -65,6 +64,14 @@ contract NaturalFlavors is ERC721, ERC721Burnable, Ownable {
     _tokenIdCounter++;
   }
 
+  function batchMint(address[] memory addresses) public {
+    require(mintingAddress == _msgSender(), 'Caller is not the minting address');
+    for (uint i = 0; i < addresses.length; i++) {
+      _mint(addresses[i], _tokenIdCounter);
+      _tokenIdCounter++;
+    }
+  }
+
   function setMintingAddress(address minter) public onlyOwner {
     mintingAddress = minter;
   }
@@ -78,10 +85,6 @@ contract NaturalFlavors is ERC721, ERC721Burnable, Ownable {
       return string(abi.encodePacked(baseDefaultUrl, tokenString, baseDefaultUrlExtension));
     }
 
-    if (!metadataIsJson[tokenId]) {
-      return tokenIdToMetadata[tokenId];
-    }
-
     string memory json = Base64.encode(stringBytes);
     return string(abi.encodePacked('data:application/json;base64,', json));
   }
@@ -93,11 +96,9 @@ contract NaturalFlavors is ERC721, ERC721Burnable, Ownable {
 
   function updateTokenMetadata(
     uint256 tokenId,
-    string memory tokenMetadata,
-    bool isJson
+    string memory tokenMetadata
   ) public onlyOwner {
     tokenIdToMetadata[tokenId] = tokenMetadata;
-    metadataIsJson[tokenId] = isJson;
   }
 
   function updateLicense(

@@ -20,16 +20,15 @@ export function ScrollToTop() {
   return null;
 }
 
-function Redirect() {
-  const l = useLocation()
-  debugger
-  return null
-}
 
+
+const basename = window.location.href.includes('steviep.xyz/natural-flavors')
+  ? '/natural-flavors'
+  : '/'
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/natural-flavors' : '/'}>
+    <BrowserRouter basename={basename}>
       <ScrollToTop />
       <Routes>
         <Route
@@ -47,7 +46,6 @@ function App() {
           }
         />
 
-        {/*<Route path="/" render={() => <Redirect />} />*/}
       </Routes>
     </BrowserRouter>
   )

@@ -37,11 +37,22 @@ describe('NaturalFlavors', () => {
     await NaturalFlavorsContract.connect(owner).mint(tokenHolder2.address)
     await NaturalFlavorsContract.connect(owner).mint(tokenHolder3.address)
 
-    console.log(await NaturalFlavorsContract.connect(owner).ownerOf(0))
-    console.log(await NaturalFlavorsContract.connect(owner).ownerOf(1))
-    console.log(await NaturalFlavorsContract.connect(owner).ownerOf(2))
-    console.log(await NaturalFlavorsContract.connect(owner).ownerOf(3))
+    await NaturalFlavorsContract.connect(owner).batchMint([
+      owner.address,
+      tokenHolder1.address,
+      tokenHolder2.address,
+      tokenHolder3.address,
+    ])
 
+
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(0)).to.equal(owner.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(1)).to.equal(tokenHolder1.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(2)).to.equal(tokenHolder2.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(3)).to.equal(tokenHolder3.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(4)).to.equal(owner.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(5)).to.equal(tokenHolder1.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(6)).to.equal(tokenHolder2.address)
+    expect(await NaturalFlavorsContract.connect(owner).ownerOf(7)).to.equal(tokenHolder3.address)
 
     const metadata0 = await NaturalFlavorsContract.connect(owner).tokenURI(0)
     expect(metadata0).to.equal('https://steviep.xyz/0.json')
@@ -50,24 +61,17 @@ describe('NaturalFlavors', () => {
     const metadata0updated = await NaturalFlavorsContract.connect(owner).tokenURI(0)
     expect(metadata0updated).to.equal('https://bing.com/0.xml')
 
-    await NaturalFlavorsContract.connect(owner).updateTokenMetadata(0, '{"name": "something"}', true)
+    await NaturalFlavorsContract.connect(owner).updateTokenMetadata(0, '{"name": "something"}')
     const metadata0updatedAgain = await NaturalFlavorsContract.connect(owner).tokenURI(0)
     const metadata0Parsed = Buffer.from(metadata0updatedAgain.split(',')[1], 'base64').toString('utf-8')
     expect(metadata0Parsed).to.equal('{"name": "something"}')
 
-    await NaturalFlavorsContract.connect(owner).updateTokenMetadata(0, '', false)
+    await NaturalFlavorsContract.connect(owner).updateTokenMetadata(0, '')
     const metadata0updatedYetAgain = await NaturalFlavorsContract.connect(owner).tokenURI(0)
     expect(metadata0updatedYetAgain).to.equal('https://bing.com/0.xml')
 
-    await NaturalFlavorsContract.connect(owner).updateTokenMetadata(0, 'ipfs://blahblahblah', false)
-    const metadata0updatedOneMoreTime = await NaturalFlavorsContract.connect(owner).tokenURI(0)
-    expect(metadata0updatedOneMoreTime).to.equal('ipfs://blahblahblah')
-
     const metadata1 = await NaturalFlavorsContract.connect(owner).tokenURI(1)
     expect(metadata1).to.equal('https://bing.com/1.xml')
-
-
-
 
 
 
@@ -76,7 +80,7 @@ describe('NaturalFlavors', () => {
     await NaturalFlavorsContract.connect(tokenHolder1).emitTokenEvent(1, 'tokenGreeting', 'Hello token 2 holder')
 
     await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).mint(tokenHolder2.address), 'Caller is not the minting address')
-    await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).updateTokenMetadata(0, 'blah', false), 'Ownable:')
+    await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).updateTokenMetadata(0, 'blah'), 'Ownable:')
     await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).updateBaseUrl('www.wrong.com', '.wrong'), 'Ownable:')
     await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).emitProjectEvent('projectGreeting', 'wrong project event'), 'Ownable:')
     await expectFailure(() => NaturalFlavorsContract.connect(tokenHolder2).emitTokenEvent(1, 'tokenGreeting', 'wrong token event'), 'Only project or token owner can emit token event')

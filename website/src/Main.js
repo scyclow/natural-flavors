@@ -12,8 +12,8 @@ import {
 import { useNFT, useNFTIndexerQuery } from '@zoralabs/nft-hooks'
 import { Link } from 'react-router-dom'
 
-import { MediaFetchAgent, Networks } from '@zoralabs/nft-hooks'
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
+import {Helmet} from 'react-helmet'
 import localTokenData from './data'
 
 const AUCTION_QUERY = gql`
@@ -146,7 +146,7 @@ export default function Main() {
   })
 
 
-  if (loading) return 'Loading...'
+  // if (loading) return <h1 style={{ marginTop: '3em', textAlign: 'center'}}>Loading...</h1>
   if (error) {
     console.log(JSON.stringify(error))
     return JSON.stringify(error)
@@ -161,7 +161,7 @@ export default function Main() {
   }
 
 
-  const filteredData = combineData(localTokenData, apiData.Token)
+  const filteredData = combineData(localTokenData, apiData?.Token || [])
     .filter(d => {
       if (selectedBrand && d.attributes.find(a => a.trait_type === 'Brand')?.value !== selectedBrand) return false
       if (selectedPacketState && d.attributes.find(a => a.trait_type === 'Packet State')?.value !== selectedPacketState) return false
@@ -187,6 +187,30 @@ export default function Main() {
 
   return (
     <div className="Main">
+
+      <Helmet>
+        <meta name="twitter:image" content={'https://steviep.xyz/natural-flavors/assets/5.jpg'} />
+        <meta name="og:image" property="og:image" content={'https://steviep.xyz/natural-flavors/assets/5.jpg'}/>
+        <meta name="og:image:alt" content="Natural Flavors" />
+
+        <meta name="title" content={'Natural Flavors'} />
+        <meta name="og:title" content={'Natural Flavors'} />
+        <meta name="twitter:title" content={'Natural Flavors'} />
+        <meta property="og:site_name" content="Natural Flavors" />
+
+        <meta name="twitter:description" content={'Natural Flavors: A Photo Series by Steve Pikelny'} />
+        <meta name="description" content={'Natural Flavors: A Photo Series by Steve Pikelny'} />
+        <meta name="og:description" content={'Natural Flavors: A Photo Series by Steve Pikelny'} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:type" content="website" />
+
+        <meta property="og:url" content={`https://steviep.xyz/natural-flavors`} />
+        <meta name="twitter:url" content={`https://steviep.xyz/natural-flavors`} />
+        <meta name="keywords" content="natural flavors, natural, flavors, nft, nfts, photo, series, photography, art, ketchup, packet, condiment, condiment packet, trash art, crypto, crypto art, fine art photography, steve, pikelny, steve pikelny, fake internet money" />
+        <title>{'Natural Flavors: A Photo Series by Steve Pikelny'}</title>
+      </Helmet>
+
       <header>
         <h1>
           Natural Flavors
@@ -246,22 +270,22 @@ export default function Main() {
               <option value="large">Large</option>
             </select>
           </div>
-{/*
+
           <div>
             <label>SORT</label>
-            <select defaultValue="endingSoon" onChange={e => setSortOrder(e.target.value)}>
+            <select disabled defaultValue="tokenID" onChange={e => setSortOrder(e.target.value)}>
               <option value="tokenID">Token ID</option>
               <option value="endingSoon">Ending Soon</option>
               <option value="lowestBid">Lowest Bid</option>
               <option value="highestBid">Highest Bid</option>
             </select>
-          </div>*/}
+          </div>
 
         </div>
       </section>
 
       <section className={`thumbnailGrid ${gridSizeClasses[gridSize]}`}>
-        {sortedData.map((d, i) => <div><Thumbnail data={d} key={d.tokenId} /></div>) }
+        {sortedData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
       </section>
 
       <section className="closingNotes">
