@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && react-snapshot && sed -i '' 's/\\/static\\//\\/natural-flavors\\/static\\//g' ./build/*/**.html && sed -i '' 's/\\/static\\//\\/natural-flavors\\/static\\//g' ./build/static/css/*.css && cp ./build/index.html ./build/404.html && cp -R ./build/ ../docs/",
+    "build": "react-scripts build && react-snapshot && cp ./build/index.html ./build/404.html && sed -i '' 's/\\/static\\//\\/natural-flavors\\/static\\//g' ./build/*.html && sed -i '' 's/\\/static\\//\\/natural-flavors\\/static\\//g' ./build/packets/*.html && sed -i '' 's/\\/static\\//\\/natural-flavors\\/static\\//g' ./build/static/css/*.css && cp -R ./build/ ../docs/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "snapshot": "react-snapshot"
