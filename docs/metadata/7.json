@@ -3,7 +3,7 @@
     "name": "Hot Sauce #2",
     "license": "CC BY-NC 4.0",
     "external_url": "https://steviep.xyz/packets/7",
-    "description": "As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this hot sauce packet is worth hundreds of dollars on the internet.",
+    "description": "As you wander along the sidewalk your mind also wanders. You think about your ancestors exploring the forest, foraging for nuts and berries and hunting wild game. But you're looking for something different. Suddenly, something catches your eye. You hurry over to inspect it. Bending over, you think to yourself: \"Oh wow, this is a good one!\" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this hot sauce packet is worth a lot of money on the internet.",
     "attributes": [
         {
             "trait_type": "Brand",
@@ -22,5 +22,5 @@
             "value": "Horizontal"
         }
     ],
-    "image": "ipfs://bafybeicu2zlbhvmzwwoeuzvueoca66aphs5gimkj4mtqm7eefcp6bvx2vq/7.jpg"
+    "image": "https://steviep.xyz/natural-flavors/assets/7.jpg"
 }
