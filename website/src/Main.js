@@ -189,8 +189,8 @@ export default function Main() {
     <div className="Main">
 
       <Helmet>
-        <meta name="twitter:image" content={'https://steviep.xyz/natural-flavors/assets/5.jpg'} />
-        <meta name="og:image" property="og:image" content={'https://steviep.xyz/natural-flavors/assets/5.jpg'}/>
+        <meta name="twitter:image" content={'https://steviep.xyz/natural-flavors/assets/thumbnail.jpg'} />
+        <meta name="og:image" property="og:image" content={'https://steviep.xyz/natural-flavors/assets/thumbnail.jpg'}/>
         <meta name="og:image:alt" content="Natural Flavors" />
 
         <meta name="title" content={'Natural Flavors'} />

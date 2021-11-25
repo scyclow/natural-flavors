@@ -4,9 +4,57 @@ async function main() {
     const NaturalFlavors = await ethers.getContractFactory('NaturalFlavors', deployer);
 
     const naturalFlavorsContract = await NaturalFlavors.deploy(
-      'ipfs://bafybeicsnpw5rn77326e6j245knn6eecqe3bt2vhvtveggwrwzkeifhzqm/',
+      'https://steviep.xyz/natural-flavors/metadata/',
     );
     await naturalFlavorsContract.deployed();
+    await naturalFlavorsContract.connect(deployer).batchMint([
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+      deployer.address,
+    ])
+
 
 
     console.log(naturalFlavorsContract.address)
