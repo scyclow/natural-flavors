@@ -189,7 +189,7 @@ export default function Main() {
     <div className="Main">
 
       <Helmet>
-        <meta name="twitter:image" content={'https://steviep.xyz/natural-flavors/assets/0.jpg'} />
+        <meta name="twitter:image" content={'https://steviep.xyz/natural-flavors/assets/0.png'} />
         <meta name="og:image" property="og:image" content={'https://steviep.xyz/natural-flavors/assets/0.jpg'}/>
         <meta name="og:image:alt" content="Natural Flavors" />
 
