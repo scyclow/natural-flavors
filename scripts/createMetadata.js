@@ -10,41 +10,46 @@ const metadata = [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-  {
-    condiment: 'Ketchup',
-    brand: `Ketchup`,
-    packetState: 'Empty',
-    orientation: 'Horizontal',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Frank's RedHot`,
-    packetState: 'Full',
-    orientation: 'Vertical',
-  },
+
   {
     condiment: 'Ketchup',
     brand: `Sysco/Heinz`,
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
+  {
+    condiment: 'Hot Sauce',
+    brand: `Popeye's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+
   {
     condiment: 'Ketchup',
-    brand: `Red Gold`,
-    packetState: 'Full',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+  {
+    condiment: 'Ketchup',
+    brand: `Ketchup`,
+    packetState: 'Empty',
     orientation: 'Horizontal',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Hunts`,
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
-    brand: `Heinz`,
+    brand: `McDonald's`,
     packetState: 'Empty',
-    orientation: 'Vertical',
+    orientation: 'Horizontal',
   },
   {
     condiment: 'Hot Sauce',
@@ -58,13 +63,13 @@ const metadata = [
     packetState: 'Splattered',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
-    brand: `McDonalds`,
+    brand: `Fancy Ketchup`,
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-
 
   {
     condiment: 'Ketchup',
@@ -72,18 +77,21 @@ const metadata = [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
-  {
-    condiment: 'Ketchup',
-    brand: `Fancy Ketchup`,
-    packetState: 'Empty',
-    orientation: 'Horizontal',
-  },
+
   {
     condiment: 'Hot Sauce',
-    brand: `Cholula`,
+    brand: `Frank's RedHot`,
     packetState: 'Full',
     orientation: 'Vertical',
   },
+  {
+    condiment: 'Mustard',
+    brand: `Flavor Fresh`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+
+
   {
     condiment: 'Mayonnaise',
     brand: `Chef's Quality`,
@@ -114,12 +122,14 @@ const metadata = [
     packetState: 'Full',
     orientation: 'Horizontal',
   },
+
   {
     condiment: 'Hot Sauce',
-    brand: `YiPin`,
+    brand: `Tabasco`,
     packetState: 'Full',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Chef's Quality`,
@@ -132,12 +142,14 @@ const metadata = [
     packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
-    brand: `Hunts`,
-    packetState: 'Empty',
-    orientation: 'Vertical',
+    brand: `McDonald's`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Heinz`,
@@ -163,11 +175,12 @@ const metadata = [
     orientation: 'Vertical',
   },
   {
-    condiment: 'Soy Sauce',
-    brand: `YiPin`,
-    packetState: 'Full',
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `McDonald's`,
@@ -198,12 +211,14 @@ const metadata = [
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
+
   {
-    condiment: 'Soy Sauce',
-    brand: `Yamasa`,
-    packetState: 'Full',
+    condiment: 'Ketchup',
+    brand: `White Castle`,
+    packetState: 'Empty',
     orientation: 'Vertical',
   },
+
   {
     condiment: 'Ketchup',
     brand: `Hunts`,
@@ -211,8 +226,8 @@ const metadata = [
     orientation: 'Vertical',
   },
   {
-    condiment: 'Mustard',
-    brand: `Flavor Fresh`,
+    condiment: 'Ketchup',
+    brand: `Red Gold`,
     packetState: 'Full',
     orientation: 'Horizontal',
   },
@@ -235,11 +250,13 @@ const metadata = [
     orientation: 'Vertical',
   },
   {
-    condiment: 'Ketchup',
-    brand: `White Castle`,
-    packetState: 'Empty',
+    condiment: 'Soy Sauce',
+    brand: `YiPin`,
+    packetState: 'Full',
     orientation: 'Vertical',
   },
+
+
   {
     condiment: 'Ketchup',
     brand: `Heinz`,
@@ -273,36 +290,6 @@ const metadata = [
 
 
   {
-    condiment: 'Duck Sauce',
-    brand: `YiPin`,
-    packetState: 'Splattered',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Tabasco`,
-    packetState: 'Full',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Hot Sauce',
-    brand: `Popeye's`,
-    packetState: 'Empty',
-    orientation: 'Vertical',
-  },
-  {
-    condiment: 'Ketchup',
-    brand: `McDonald's`,
-    packetState: 'Splattered',
-    orientation: 'Horizontal',
-  },
-  {
-    condiment: 'Ketchup',
-    brand: `Heinz`,
-    packetState: 'Empty',
-    orientation: 'Vertical',
-  },
-  {
     condiment: 'Ketchup',
     brand: `Charleys`,
     packetState: 'Empty',
@@ -322,7 +309,7 @@ const metadata = [
     name,
     license: 'CC BY-NC 4.0',
     external_url: `https://steviep.xyz/packets/${i}`,
-    description: `As you wander along the sidewalk your mind also wanders. You think about your ancestors exploring the forest, foraging for nuts and berries and hunting wild game. But you're looking for something different. Suddenly, something catches your eye. You hurry over to inspect it. Bending over, you think to yourself: "Oh wow, this is a good one!" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ${d.condiment.toLowerCase()} packet is worth a lot of money on the internet.`,
+    description: `As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: "Oh wow, this is a good one!" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.`,
     attributes: [
       { trait_type: 'Brand', value: d.brand },
       { trait_type: 'Condiment', value: d.condiment },

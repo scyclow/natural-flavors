@@ -45,7 +45,7 @@ export default [
 
   {
     condiment: 'Ketchup',
-    brand: `McDonalds`,
+    brand: `McDonald's`,
     packetState: 'Empty',
     orientation: 'Horizontal',
   },
