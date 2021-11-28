@@ -1,14 +1,18 @@
 import './Page.css'
 import { useParams } from 'react-router-dom'
 import tokenData from './data'
-// import {NFTFullPage} from "@zoralabs/nft-components";
+
 import { Link } from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 
 
 
+
+
 export default function Page() {
   const { id } = useParams()
+
+
 
   const data = tokenData.find(d => d.tokenId === id)
   if (!data) return (
@@ -48,38 +52,31 @@ export default function Page() {
         <h2>{`Natural Flavors: ${data.name}`}</h2>
       </header>
       <div className="photo">
-        <img src={`../assets/${id}.jpg`} />
+        <a href={`../assets/${id}.jpg`} target="_blank">
+          <img src={`../assets/${id}.jpg`} />
+        </a>
       </div>
 
-      <div class="viewButton">
-{/*        <NFTFullPage
-          contract={window.CONTRACT_ADDR}
-          id={id}
-        />*/}
-      </div>
       <section className="tokenData">
-        <div class="viewDetails">
-          <div>
+        <p className="tokenDescription">{data.description}</p>
+      </section>
+
+      <section>
+        <div className="dlContainer">
+          <dl>
             {data.attributes.map(a =>
               <div>
-                {a.trait_type}: {a.value}
+                <dt>{a.trait_type}:</dt> <dd>{a.value}</dd>
               </div>
             )}
-          </div>
-{/*
-          <NFTFullPage
-            contract={window.CONTRACT_ADDR}
-            id={id}
-          />
-    */}
+            <div><dt>License:</dt><dd>CC BY-NC 4.0</dd></div>
+            <div><dt>Zora:</dt><dd><a href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${id}`} target="_blank" rel="nofollow">View</a></dd></div>
+            <div><dt>OpenSea:</dt><dd><a href={`https://opensea.io/assets/${window.CONTRACT_ADDR}/${id}`} target="_blank" rel="nofollow">View</a></dd></div>
+            <div><dt>Etherscan:</dt><dd><a href={`https://etherscan.io/token/${window.CONTRACT_ADDR}?a=${id}`} target="_blank" rel="nofollow">View</a></dd></div>
+          </dl>
         </div>
       </section>
-{/*      <section className="tokenData">
-        <div className="details">
-          {JSON.stringify(tokenData[id])}
-        </div>
 
-      </section>*/}
     </div>
   )
 }

@@ -28,26 +28,35 @@ const basename = window.location.href.includes('steviep.xyz/natural-flavors')
 
 function App() {
   return (
-    <BrowserRouter basename={basename}>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path="/packets/:id"
-          element={
-            <Page />
-          }
-        />
+    <>
+      <BrowserRouter basename={basename}>
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path="/packets/:id"
+            element={
+              <Page />
+            }
+          />
 
-        <Route
-          exact
-          path="/"
-          element={
-            <Main />
-          }
-        />
+          <Route
+            exact
+            path="/"
+            element={
+              <Main />
+            }
+          />
 
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+      <footer>
+        <div>
+          <div><a href="https://twitter.com/steviepxyz" target="_blank" rel="nofollow">twitter</a></div>
+          <div><a href="https://discord.gg/9uA8WBFpcB" target="_blank" rel="nofollow">discord</a></div>
+          <div><a href="https://steviep.xyz" target="_blank">steviep</a> (c) 2021</div>
+        </div>
+      </footer>
+    </>
   )
 }
 

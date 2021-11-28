@@ -313,7 +313,7 @@ export default [
     name,
     license: 'CC BY-NC 4.0',
     external_url: `https://steviep.xyz/packets/${i}`,
-    description: `As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: "Oh wow, this is a good one!" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ketchup packet is worth hundreds of dollars on the internet.`,
+    description: `As you wander along the sidewalk your mind also wanders -- but your eyes continue to scan the ground. Your ancestors foraged for nuts and berries, but you're looking for something different. Eventually your eyes pick something up in distance. You walk over to inspect it a little closer. Bending over, you think: "Oh wow, this is a good one!" A confused stranger looks up from their phone and rolls their eyes. They don't understand that this ${d.condiment.toLowerCase()} packet is worth a lot of money on the internet.`,
     attributes: [
       { trait_type: 'Brand', value: d.brand },
       { trait_type: 'Condiment', value: d.condiment },
