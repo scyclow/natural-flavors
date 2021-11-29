@@ -94,6 +94,7 @@ select {
 .thumbnailGrid > * {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .thumbnailGridXS {

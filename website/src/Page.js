@@ -41,20 +41,19 @@ export default function Page() {
   const { hours, minutes, seconds, expired } = useCountdown(data?.endTime)
 
 
-  if (!data) return (
+  if (!_data) return (
     <div>
       <h2>No token with id {id}</h2>
       <Link to="/"><h2>{'< Back'}</h2></Link>
     </div>
   )
 
-
   let details
   if (data?.status === 'IN_PROGRESS' && expired) {
     details = <div>Sold: {data?.currentBid} ETH</div>
   } else if (data?.status === 'IN_PROGRESS') {
     details = (
-      <section class="pageSection auctionDetails">
+      <section className="pageSection auctionDetails">
         <div>
           <h2>Highest Bid: {data?.currentBid} ETH</h2>
           <h2>Time Left: {fmt(hours)}:{fmt(minutes)}:{fmt(seconds)}</h2>
@@ -71,8 +70,8 @@ export default function Page() {
     )
   } else if (data?.status === 'APPROVED') {
     details = (
-      <section class="pageSection auctionDetails">
-        <h2>Reserve: 0.0099 ETH</h2>
+      <section className="pageSection auctionDetails">
+        <h2>Reserve: {data?.reservePrice} ETH</h2>
         <a
           href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${data.tokenId}/auction/bid`}
           target="_blank"
@@ -155,13 +154,14 @@ export default function Page() {
 
 
 
-const combineData = (localData, apiData) => {
+const combineData = (localData={}, apiData={}) => {
   const auction = apiData?.auctions?.[0] || {}
   const currentBid = prettyNumber(auction.lastBidAmount)
   const reservePrice = prettyNumber(auction.reservePrice)
 
   return {
     ...localData,
+    reservePrice,
     currentBid,
     endTime: auction.expiresAt && new Date(auction.expiresAt).getTime(),
     status: auction.status

@@ -275,7 +275,7 @@ export default function Main() {
 
       {!!featuredData.length && (<>
         <h2 style={{ textAlign: 'center'}}>Open</h2>
-        <section className={`thumbnailGrid thumbnailGridMedium`}>
+        <section className={`thumbnailGrid ${gridSizeClasses[gridSize]}`}>
           {featuredData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
         </section>
         <h2 style={{ textAlign: 'center'}}>Collection</h2>
@@ -317,7 +317,7 @@ function Thumbnail({ data }) {
       </div>
     )
   } else if (data?.status === 'APPROVED') {
-    details = <div>Reserve: {data?.reservePrice}</div>
+    details = <div>Reserve: {data?.reservePrice} ETH</div>
   }
 
 
@@ -334,10 +334,11 @@ function Thumbnail({ data }) {
 
   if (data.status && !expired) {
     return (
-      <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`}>
-        <Link to={`/packets/${data.tokenId}`} style={{ textAlign: 'center', textDecoration: 'none' }}>
-            {content}
-        </Link>
+      <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`} style={{display: 'flex', justifyContent: 'center'}}>
+        <div>
+          <Link to={`/packets/${data.tokenId}`} style={{ textAlign: 'center', textDecoration: 'none' }}>
+              {content}
+          </Link>
           <a
             href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${data.tokenId}/auction/bid`}
             target="_blank"
@@ -348,6 +349,7 @@ function Thumbnail({ data }) {
             {'Bid >'}
           </a>
         </div>
+      </div>
     )
   } else {
     return (
