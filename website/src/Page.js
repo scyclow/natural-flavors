@@ -1,11 +1,12 @@
 import './Page.css'
 import { useParams } from 'react-router-dom'
 import tokenData from './data'
-import { useState, useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 import { gql, useQuery } from '@apollo/client'
+import { prettyNumber, fmt, useCountdown } from './utils'
+
 
 
 
@@ -37,26 +38,7 @@ export default function Page() {
 
   const data = combineData(_data, apiData?.Token?.[0])
 
-  const endTimeSet = !!data?.endTime
-
-  const { h, m, s, e } = getTimes(data?.endTime)
-  const [hours, setHours] = useState(endTimeSet ? h : 0)
-  const [minutes, setMinutes] = useState(endTimeSet ? m : 0)
-  const [seconds, setSeconds] = useState(endTimeSet ? s : 0)
-  const [expired, setExpired] = useState(endTimeSet ? e : 0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const { h, m, s, e } = getTimes(data?.endTime)
-
-      setHours(h)
-      setMinutes(m)
-      setSeconds(s)
-      setExpired(e)
-    }, 1000)
-
-    return () => clearInterval(interval)
-  })
+  const { hours, minutes, seconds, expired } = useCountdown(data?.endTime)
 
 
   if (!data) return (
@@ -72,7 +54,7 @@ export default function Page() {
     details = <div>Sold: {data?.currentBid} ETH</div>
   } else if (data?.status === 'IN_PROGRESS') {
     details = (
-      <section class="auctionDetails">
+      <section class="pageSection auctionDetails">
         <div>
           <h2>Highest Bid: {data?.currentBid} ETH</h2>
           <h2>Time Left: {fmt(hours)}:{fmt(minutes)}:{fmt(seconds)}</h2>
@@ -89,7 +71,7 @@ export default function Page() {
     )
   } else if (data?.status === 'APPROVED') {
     details = (
-      <section class="auctionDetails">
+      <section class="pageSection auctionDetails">
         <h2>Reserve: 0.0099 ETH</h2>
         <a
           href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${data.tokenId}/auction/bid`}
@@ -133,20 +115,23 @@ export default function Page() {
         <Link to="/"><h2>{'< Back'}</h2></Link>
         <h2>{`Natural Flavors: ${data.name}`}</h2>
       </header>
-      <div className="photo">
-        <a href={`../assets/${id}.jpg`} target="_blank">
-          <img src={`../assets/${id}.jpg`} />
-        </a>
-      </div>
+
+      <section className="pageSection">
+        <div className="photo">
+          <a href={`../assets/${id}.jpg`} target="_blank">
+            <img src={`../assets/${id}.jpg`} />
+          </a>
+        </div>
+      </section>
 
 
       {details}
 
-      <section className="tokenData">
+      <section className="pageSection tokenData">
         <p className="tokenDescription">{data.description}</p>
       </section>
 
-      <section>
+      <section className="pageSection">
         <div className="dlContainer">
           <dl>
             {data.attributes.map(a =>
@@ -167,34 +152,13 @@ export default function Page() {
 }
 
 
-const fmt = (n) => {
-  const r = Math.floor(n)
-  if (r < 10) return '0' + r
-  else return '' + r
-}
 
-const getTimes = (endTime) => {
-  const now = Date.now()
-  const diff = ((endTime||0) - now)
-  const h = (diff / 86400000) * 24
-  const m = (h - Math.floor(h)) * 60
-  const s = (m - Math.floor(m)) * 60
-  const e = diff < 0  && endTime
 
-  return {
-    h: Math.floor(h),
-    m: Math.floor(m),
-    s: Math.floor(s),
-    e
-  }
-}
 
 const combineData = (localData, apiData) => {
   const auction = apiData?.auctions?.[0] || {}
-
-  const currentBid = auction.lastBidAmount
-    ? Number(auction.lastBidAmount.substring(0, auction.lastBidAmount.length - 15)) / 1000
-    : null
+  const currentBid = prettyNumber(auction.lastBidAmount)
+  const reservePrice = prettyNumber(auction.reservePrice)
 
   return {
     ...localData,

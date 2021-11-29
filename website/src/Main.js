@@ -1,7 +1,7 @@
 
 import './Main.css';
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import shuffle from 'lodash/shuffle'
 
 import { Link } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { gql, useQuery } from '@apollo/client'
 import {Helmet} from 'react-helmet'
 import localTokenData from './data'
+import { prettyNumber, fmt, getTimes, useCountdown } from './utils'
 
 const AUCTION_QUERY = gql`
   query Tokens($contract: String!) {
@@ -91,14 +92,13 @@ const combineData = (localData, auctionData) => {
     const matchingAuctionData = auctionData.find(a => a.tokenId === l.tokenId)
 
     const auction = matchingAuctionData?.auctions?.[0] || {}
-
-    const currentBid = auction.lastBidAmount
-      ? Number(auction.lastBidAmount.substring(0, auction.lastBidAmount.length - 15)) / 1000
-      : null
+    const currentBid = prettyNumber(auction.lastBidAmount)
+    const reservePrice = prettyNumber(auction.reservePrice)
 
     return {
       ...l,
       currentBid,
+      reservePrice,
       endTime: auction.expiresAt && new Date(auction.expiresAt).getTime(),
       status: auction.status
     }
@@ -107,21 +107,6 @@ const combineData = (localData, auctionData) => {
 
 
 
-const getTimes = (endTime) => {
-  const now = Date.now()
-  const diff = ((endTime||0) - now)
-  const h = (diff / 86400000) * 24
-  const m = (h - Math.floor(h)) * 60
-  const s = (m - Math.floor(m)) * 60
-  const e = diff < 0  && endTime
-
-  return {
-    h: Math.floor(h),
-    m: Math.floor(m),
-    s: Math.floor(s),
-    e
-  }
-}
 
 const defaultGridSize = window.innerWidth < 750 ? 'large' : 'medium'
 export default function Main() {
@@ -302,38 +287,20 @@ export default function Main() {
       <section className="closingNotes">
         <h2>Five additional tokens will be minted and distributed at the artist's discretion, bringing the total collection size to 50.</h2>
       </section>
+
+
+      <h2 style={{ textAlign: 'center', wordWrap: 'break-word', padding: '1em'}}>
+        <a href={`https://etherscan.io/address/${window.CONTRACT_ADDR}`} target="_blank" rel="nofollow">{window.CONTRACT_ADDR}</a>
+      </h2>
+
     </div>
   );
 }
 
-const fmt = (n) => {
-  const r = Math.floor(n)
-  if (r < 10) return '0' + r
-  else return '' + r
-}
+
+
 function Thumbnail({ data }) {
-  const endTimeSet = !!data?.endTime
-
-  const { h, m, s, e } = getTimes(data?.endTime)
-
-
-  const [hours, setHours] = useState(endTimeSet ? h : 0)
-  const [minutes, setMinutes] = useState(endTimeSet ? m : 0)
-  const [seconds, setSeconds] = useState(endTimeSet ? s : 0)
-  const [expired, setExpired] = useState(endTimeSet ? e : 0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const { h, m, s, e } = getTimes(data?.endTime)
-
-      setHours(h)
-      setMinutes(m)
-      setSeconds(s)
-      setExpired(e)
-    }, 1000)
-
-    return () => clearInterval(interval)
-  })
+  const { hours, minutes, seconds, expired } = useCountdown(data?.endTime)
 
   if (!data) return 'Loading...'
 
@@ -350,7 +317,7 @@ function Thumbnail({ data }) {
       </div>
     )
   } else if (data?.status === 'APPROVED') {
-    details = <div>Reserve: 0.0099 ETH</div>
+    details = <div>Reserve: {data?.reservePrice}</div>
   }
 
 
@@ -436,10 +403,4 @@ export function MarqueeReverse({ children, duration, className, style }) {
   )
 }
 
-function times(n, fn) {
-  const out = []
-  for (let i = 0; i < n; i++) {
-    out.push(fn(i))
-  }
-  return out
-}
+

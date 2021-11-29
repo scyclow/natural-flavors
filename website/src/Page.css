@@ -121,7 +121,9 @@ dt {
   align-items: center;
 }
 
-
+.pageSection {
+  margin-bottom: 3em;
+}
 
 footer > *, .ThumbnailDescription, .dlContainer dl, .tokenDescription {
   background-color: #000;
@@ -142,5 +144,9 @@ footer > *, .ThumbnailDescription, .dlContainer dl, .tokenDescription {
 
 .bidButton:hover {
   box-shadow: 0 0 15px #00ffff;
+}
+
+.photo img {
+  background-color: #000;
 }
 

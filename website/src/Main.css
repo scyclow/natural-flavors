@@ -220,6 +220,10 @@ h2 {
   animation: FullColorRotate 25s linear infinite, ShadowRotateSmall 25s linear infinite;
 }
 
+.Thumbnail {
+  background-color: #000;
+}
+
 .marquee, .marqueeReverse {
   animation: FullColorRotate 25s linear infinite, ShadowRotateSmall 25s linear infinite;
 }
