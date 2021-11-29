@@ -24,7 +24,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #e6f1f3;
-  border: 1px solid;
+  border: 4px solid;
   max-width: 900px;
 
 }
@@ -36,7 +36,7 @@
 .photo img {
   max-width: 100%;
   max-height: 700px;
-  border: 1px solid;
+  border: 4px solid;
 }
 
 .bidPrompt a {
@@ -67,11 +67,11 @@
   justify-content: center;
 }
 .dlContainer dl {
-  width: 220px;
+  width: 270px;
   display: block;
   align-items: center;
   background-color: #e6f1f3;
-  border: 1px solid;
+  border: 4px solid;
   padding: 1em;
 }
 .dlContainer dl > * {
@@ -82,7 +82,11 @@
 .dlContainer dt,
 .dlContainer dd {
   display: inline-block;
-  width: 100px;
+  width: 130px;
+}
+
+dt {
+  text-align: right;
 }
 
 
@@ -102,29 +106,41 @@
   }
 }
 
-/*.zora-fullMediaWrapper, .zora-colectionTagWrapper, .zora-fullTitle {
-  display: none !important;
-}
+.auctionDetails h2 {
+  text-align: center;
 
-.viewButton .zora-fullDescription,
-.viewButton .zora-infoContainer,
-.viewButton .zora-fullCreatorOwnerSection {
-  display: none !important;
 }
-
-.viewButton .zora-button {
-  color: #e6f1f3;
-  background-color: #221c17;
-}
-.viewButton .zora-button:hover {
-  background-color: #463a30;
-}
-
-.viewButton {
+.auctionDetails {
+  max-width: 400px;
+  background-color: #000;
+  padding: 1em;
+  border: 4px solid;
+  margin: 1em auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-.viewDetails .zora-button {
-  display: none !important;
-}*/
+
+
+footer > *, .ThumbnailDescription, .dlContainer dl, .tokenDescription {
+  background-color: #000;
+}
+
+.bidButton {
+  text-decoration: none;
+  border: 1px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  display: inline-block;
+  margin: 0.75em 0;
+  font-size: 3em;
+  animation: BGRotate 15s linear infinite;
+  transition: 300ms;
+}
+
+.bidButton:hover {
+  box-shadow: 0 0 15px #00ffff;
+}
+

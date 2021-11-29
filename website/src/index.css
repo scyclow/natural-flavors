@@ -3,16 +3,30 @@
   padding: 0;
 
   color: #221c17;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-family: 'Lato', monospace;
+  font-family: 'Roboto Mono', monospace;
+  /*font-family: 'Lato', monospace;*/
+  font-weight: 500;
+
 
 }
 
 
 body {
-  background-color: #bababc;
-  background-image: url('./bg.jpg');
+  /*background-color: #bababc;*/
+  background-color: #000;
+  background-image: url('./bg-inverted.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+
+}
+
+
+::selection {
+  background: #00ffff;
+  color: #ff00ff;
+}
+::-moz-selection  {
+  background: #00ffff;
+  color: #ff00ff;
 }

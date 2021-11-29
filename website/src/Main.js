@@ -14,7 +14,7 @@ const AUCTION_QUERY = gql`
   query Tokens($contract: String!) {
     Token(where: { address: { _eq: $contract } }){
       tokenId
-      auctions(order_by: { expiresAt: desc } limit: 1) {
+      auctions(order_by: { expiresAt: desc } limit: 1 where: { status: {_in: ["APPROVED", "IN_PROGRESS"]} }) {
         status
         lastBidAmount
         reservePrice
@@ -144,7 +144,7 @@ export default function Main() {
     console.log(JSON.stringify(error))
     return JSON.stringify(error)
   }
-console.log(apiData)
+
 
   const gridSizeClasses = {
     xs: 'thumbnailGridXS',
@@ -179,6 +179,8 @@ console.log(apiData)
   }
 
 
+  const featuredData = sortedData.filter(d => ['IN_PROGRESS', 'APPROVED'].includes(d.status) && !getTimes(d?.endTime)?.e)
+  const restData = sortedData.filter(d => !['IN_PROGRESS', 'APPROVED'].includes(d.status) || getTimes(d?.endTime)?.e)
 
   return (
     <div className="Main">
@@ -205,6 +207,9 @@ console.log(apiData)
         <meta name="keywords" content="natural flavors, natural, flavors, nft, nfts, photo, series, photography, art, ketchup, packet, condiment, condiment packet, trash art, crypto, crypto art, fine art photography, steve, pikelny, steve pikelny, fake internet money" />
         <title>{'Natural Flavors: A Photo Series by Steve Pikelny'}</title>
       </Helmet>
+      <Marquee style={{ padding: '0.5em' }} >
+        <span className="marqueeChild">CYBER MONDAY FLASH SALE!!!</span>
+      </Marquee>
 
       <header>
         <h1>
@@ -213,9 +218,10 @@ console.log(apiData)
         <h2>by <a href="https://steviep.xyz" target="_blank">Steve Pikelny</a></h2>
       </header>
 
-      <section>
-        <h2 style={{ margin: '2em 0 ', textAlign: 'center', padding: '1em' }}>Auctions will begin on 11/29</h2>
-      </section>
+      <MarqueeReverse style={{ padding: '0.5em' }} >
+        <span className="marqueeChild">CYBER MONDAY FLASH SALE!!!</span>
+      </MarqueeReverse>
+
 
       <section className="center">
         <div className="filterPanel">
@@ -246,6 +252,7 @@ console.log(apiData)
             </select>
           </div>
 
+        {/*
           <div>
             <label>ORIENTATION</label>
             <select defaultValue="" onChange={e => setSelectedOrientation(e.target.value)}>
@@ -276,12 +283,20 @@ console.log(apiData)
               <option value="random">Highest Bid</option>
             </select>
           </div>
+        */}
 
         </div>
       </section>
 
+      {!!featuredData.length && (<>
+        <h2 style={{ textAlign: 'center'}}>Open</h2>
+        <section className={`thumbnailGrid thumbnailGridLarge`}>
+          {featuredData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
+        </section>
+        <h2 style={{ textAlign: 'center'}}>Collection</h2>
+      </>)}
       <section className={`thumbnailGrid ${gridSizeClasses[gridSize]}`}>
-        {sortedData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
+        {restData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
       </section>
 
       <section className="closingNotes">
@@ -335,7 +350,7 @@ function Thumbnail({ data }) {
       </div>
     )
   } else if (data?.status === 'APPROVED') {
-    details = <div>Reserve: 0.1 ETH</div>
+    details = <div>Reserve: 0.0099 ETH</div>
   }
 
 
@@ -352,24 +367,27 @@ function Thumbnail({ data }) {
 
   if (data.status && !expired) {
     return (
-      <a
-        href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${data.tokenId}/auction/bid`}
-        target="_blank"
-        rel="nofollow"
-        style={{ textAlign: 'center' }}
-      >
-        <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`}>
-          {content}
-          <div className="thumbnailClickPrompt">{'Bid >'}</div>
+      <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`}>
+        <Link to={`/packets/${data.tokenId}`} style={{ textAlign: 'center', textDecoration: 'none' }}>
+            {content}
+        </Link>
+          <a
+            href={`${window.BASE_ZORA_URL}/collections/${window.CONTRACT_ADDR}/${data.tokenId}/auction/bid`}
+            target="_blank"
+            rel="nofollow"
+            style={{ textAlign: 'center', display: 'block' }}
+            className="thumbnailClickPrompt thumbnailClickPromptBid"
+          >
+            {'Bid >'}
+          </a>
         </div>
-      </a>
     )
   } else {
     return (
       <Link to={`/packets/${data.tokenId}`} style={{ textAlign: 'center' }}>
         <div className={`Thumbnail ${isVertical ? 'ThumbnailVertical' : '' }`}>
           {content}
-          <div className="thumbnailClickPrompt">{'View >'}</div>
+          <div className="thumbnailClickPrompt thumbnailClickPromptView">{'View >'}</div>
         </div>
       </Link>
     )
@@ -378,6 +396,45 @@ function Thumbnail({ data }) {
 
 }
 
+export function Marquee({ children, duration, className, style }) {
+  const animationDuration = duration ? duration + 's' : '5s'
+  return (
+      <div className={`marquee ${className || ''}`} style={style}>
+        <div className="marqueeInner" style={{ animationDuration }}>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+        </div>
+      </div>
+  )
+}
+
+export function MarqueeReverse({ children, duration, className, style }) {
+  const animationDuration = duration ? duration + 's' : '5s'
+  return (
+      <div className={`marquee ${className || ''}`} style={style}>
+        <div className="marqueeInnerReverse" style={{ animationDuration }}>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{children}</span>
+        </div>
+      </div>
+  )
+}
 
 function times(n, fn) {
   const out = []

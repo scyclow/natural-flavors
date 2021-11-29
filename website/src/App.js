@@ -27,8 +27,25 @@ const basename = window.location.href.includes('steviep.xyz/natural-flavors')
   : '/'
 
 function App() {
+
+  const lines = window.innerWidth < 790 ? 40 : 75
+  const a = window.innerWidth < 790 ? 2.5 : 2
+  const paths = []
+  for (let i=0; i<lines; i++) {
+    paths.push(<path key={i} d={`M0 ${a*i*(window.innerHeight/lines)} ${a*i*(window.innerWidth/lines)} 0`} style={{ animationDelay: `-${i*0.5}s`}} />)
+  }
+  const responsiveStyle = window.innerWidth < 790 ? { height: '100vh'} : {}
   return (
     <>
+      <svg
+        viewBox="0 0 640 640"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ position: 'fixed', zIndex: -1, ...responsiveStyle }}
+      >
+        {paths}
+      </svg>
+
       <BrowserRouter basename={basename}>
         <ScrollToTop />
         <Routes>
