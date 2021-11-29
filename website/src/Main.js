@@ -275,7 +275,7 @@ export default function Main() {
 
       {!!featuredData.length && (<>
         <h2 style={{ textAlign: 'center'}}>Open</h2>
-        <section className={`thumbnailGrid thumbnailGridLarge`}>
+        <section className={`thumbnailGrid thumbnailGridMedium`}>
           {featuredData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
         </section>
         <h2 style={{ textAlign: 'center'}}>Collection</h2>
