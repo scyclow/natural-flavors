@@ -1,4 +1,12 @@
-const { expect } = require("chai")
+const { expect } = require('chai')
+const { ethers, waffle } = require('hardhat')
+
+
+function times(t, fn) {
+  const out = []
+  for (let i = 0; i < t; i++) out.push(fn(i))
+  return out
+}
 
 const expectFailure = async (fn, err) => {
   let failure
@@ -98,5 +106,124 @@ describe('NaturalFlavors', () => {
 
 
     // await NaturalFlavorsContract.connect(tokenHolder1)[safeTransferFrom](tokenHolder1.address, tokenHolder3.address, 1)
+  })
+})
+
+describe.only('NaturalFlavorFinder', () => {
+  let owner, claimer1, claimer2, signers
+  let NaturalFlavors, NaturalFlavorsFinder
+
+  beforeEach(async () => {
+    const signers = await ethers.getSigners()
+    owner = signers[0]
+    claimer1 = signers[1]
+    claimer2 = signers[2]
+
+
+    const NaturalFlavorsFactory = await ethers.getContractFactory('NaturalFlavors', owner)
+    NaturalFlavors = await NaturalFlavorsFactory.deploy('https://steviep.xyz/')
+
+    await NaturalFlavors.deployed()
+    await NaturalFlavors.connect(owner).batchMint(times(50, () => owner.address))
+
+    const NaturalFlavorsFinderFactory = await ethers.getContractFactory('NaturalFlavorsFinder', owner)
+    NaturalFlavorsFinder = await NaturalFlavorsFinderFactory.deploy(NaturalFlavors.address)
+
+    const safeTransferFrom = "safeTransferFrom(address,address,uint256)"
+
+    await NaturalFlavors.connect(owner)[safeTransferFrom](owner.address, NaturalFlavorsFinder.address, 49)
+    await NaturalFlavors.connect(owner)[safeTransferFrom](owner.address, NaturalFlavorsFinder.address, 48)
+    await NaturalFlavors.connect(owner)[safeTransferFrom](owner.address, NaturalFlavorsFinder.address, 47)
+    await NaturalFlavors.connect(owner)[safeTransferFrom](owner.address, NaturalFlavorsFinder.address, 46)
+    await NaturalFlavors.connect(owner)[safeTransferFrom](owner.address, NaturalFlavorsFinder.address, 45)
+  })
+
+  describe('constructor', () => {
+    it('should work', async () => {
+      const ownerAddr = await NaturalFlavorsFinder.owner()
+      const nfAddr = await NaturalFlavorsFinder.naturalFlavorsContract()
+
+      expect(owner.address).to.equal(ownerAddr)
+      expect(NaturalFlavors.address).to.equal(nfAddr)
+    })
+  })
+
+  describe('transferOwnership', () => {
+    it('should transfer ownership', async () => {
+      await NaturalFlavorsFinder.connect(owner).transferOwnership(claimer1.address)
+
+      const newOwner = await NaturalFlavorsFinder.owner()
+      expect(newOwner).to.equal(claimer1.address)
+    })
+    it('should revert if called by non owner', async () => {
+      await expectFailure(
+        () => NaturalFlavorsFinder.connect(claimer2).transferOwnership(claimer1.address),
+        'Ownable: caller is not the owner'
+      )
+    })
+  })
+
+  describe('ownerWithdraw', () => {
+    it('should revert if called by non owner', async () => {
+      await expectFailure(
+        () => NaturalFlavorsFinder.connect(claimer2).ownerWithdraw(49),
+        'Ownable: caller is not the owner'
+      )
+    })
+
+    it('should send tokens to owner', async () => {
+      const originalOwner = await NaturalFlavors.connect(owner).ownerOf(49)
+      await NaturalFlavorsFinder.connect(owner).ownerWithdraw(49)
+      const newOwner = await NaturalFlavors.connect(owner).ownerOf(49)
+
+      expect(originalOwner).to.equal(NaturalFlavorsFinder.address)
+      expect(newOwner).to.equal(owner.address)
+    })
+  })
+
+  describe('setTokenClaimer', () => {
+    it('should revert if called by non owner', async () => {
+      const hashedClaimer = await NaturalFlavorsFinder.connect(claimer2).hashClaimer(claimer2.address)
+      await expectFailure(
+        () => NaturalFlavorsFinder.connect(claimer2).setTokenClaimer(49, hashedClaimer),
+        'Ownable: caller is not the owner'
+      )
+    })
+
+    it('should set the token claimer', async () => {
+      const hashedClaimer = await NaturalFlavorsFinder.connect(claimer2).hashClaimer(claimer2.address)
+      await NaturalFlavorsFinder.connect(owner).setTokenClaimer(49, hashedClaimer)
+      const claimer = await NaturalFlavorsFinder.connect(owner).tokenClaimers(49)
+      expect(hashedClaimer).to.equal(claimer)
+
+    })
+  })
+
+  describe('claim', () => {
+    it('should revert if wrong address attempts to claim', async () => {
+      const hashedClaimer = await NaturalFlavorsFinder.connect(claimer2).hashClaimer(claimer2.address)
+      await NaturalFlavorsFinder.connect(owner).setTokenClaimer(49, hashedClaimer)
+      await expectFailure(
+        () => NaturalFlavorsFinder.connect(claimer1).claim(49),
+        'Signer cannot claim token'
+      )
+
+    })
+    it('should transfer ownership if hashed addr claims', async () => {
+      const originalOwner = await NaturalFlavors.connect(owner).ownerOf(49)
+
+      const hashedClaimer = await NaturalFlavorsFinder.connect(claimer2).hashClaimer(claimer2.address)
+      await NaturalFlavorsFinder.connect(owner).setTokenClaimer(49, hashedClaimer)
+      await NaturalFlavorsFinder.connect(claimer2).claim(49)
+
+      const newOwner = await NaturalFlavors.connect(owner).ownerOf(49)
+
+      expect(originalOwner).to.equal(NaturalFlavorsFinder.address)
+      expect(newOwner).to.equal(claimer2.address)
+
+      console.log(
+        await NaturalFlavorsFinder.connect(claimer2).hashClaimer('0x62bAA2E4d2d40ad3912c4AAA73E3d6A3D83b8DEB')
+      )
+    })
   })
 })

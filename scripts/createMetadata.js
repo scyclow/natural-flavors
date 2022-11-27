@@ -296,6 +296,47 @@ const metadata = [
     orientation: 'Horizontal',
   },
 
+
+
+  {
+    condiment: 'Pepper Sauce',
+    brand: `Diamond Red`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+
+
+  {
+    condiment: 'Soy Sauce',
+    brand: `Shirakiku`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Hellmann's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+
 ].map((d, i) => {
 
   if (!count[d.condiment]) {
@@ -323,8 +364,8 @@ const metadata = [
 metadata.forEach((d, i) => {
   fs.writeFileSync(`../website/public/metadata/${i}.json`, JSON.stringify({
     ...d,
-    // image: `ipfs://bafybeicu2zlbhvmzwwoeuzvueoca66aphs5gimkj4mtqm7eefcp6bvx2vq/${i}.jpg`
-    image: `https://steviep.xyz/natural-flavors/assets/${i}.jpg`
+    image: `ipfs://bafybeidf5d572tfhw3wpscjakulrpz6fpsaqoxpcpbqurmqjvjap2raxd4/${i}.jpg`
+    // image: `https://steviep.xyz/natural-flavors/assets/${i}.jpg`
   }, null, 4))
 })
 
