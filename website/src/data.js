@@ -296,6 +296,44 @@ export default [
 
 
 
+  {
+    condiment: 'Pepper Sauce',
+    brand: `Diamond Red`,
+    packetState: 'Full',
+    orientation: 'Vertical',
+  },
+
+
+  {
+    condiment: 'Soy Sauce',
+    brand: `Shirakiku`,
+    packetState: 'Full',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Hellmann's`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Chef's Quality`,
+    packetState: 'Splattered',
+    orientation: 'Horizontal',
+  },
+
+
+  {
+    condiment: 'Ketchup',
+    brand: `Heinz`,
+    packetState: 'Empty',
+    orientation: 'Vertical',
+  },
 
 
 

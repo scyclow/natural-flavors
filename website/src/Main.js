@@ -284,11 +284,6 @@ export default function Main() {
         {restData.map((d, i) => <div key={`thumbnail-${i}`}><Thumbnail data={d} key={d.tokenId} /></div>) }
       </section>
 
-      <section className="closingNotes">
-        <h2>Five additional tokens will be minted and distributed at the artist's discretion, bringing the total collection size to 50.</h2>
-      </section>
-
-
       <h2 style={{ textAlign: 'center', wordWrap: 'break-word', padding: '1em'}}>
         <a href={`https://etherscan.io/address/${window.CONTRACT_ADDR}`} target="_blank" rel="nofollow">{window.CONTRACT_ADDR}</a>
       </h2>
