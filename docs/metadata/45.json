@@ -15,7 +15,7 @@
         },
         {
             "trait_type": "Packet State",
-            "value": "Full"
+            "value": "Empty"
         },
         {
             "trait_type": "Orientation",

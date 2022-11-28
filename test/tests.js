@@ -145,6 +145,12 @@ describe.only('NaturalFlavorFinder', () => {
 
       expect(owner.address).to.equal(ownerAddr)
       expect(NaturalFlavors.address).to.equal(nfAddr)
+
+      expect(await NaturalFlavorsFinder.connect(owner).claimed(49)).to.equal(false)
+      expect(await NaturalFlavorsFinder.connect(owner).claimed(48)).to.equal(false)
+      expect(await NaturalFlavorsFinder.connect(owner).claimed(47)).to.equal(false)
+      expect(await NaturalFlavorsFinder.connect(owner).claimed(46)).to.equal(false)
+      expect(await NaturalFlavorsFinder.connect(owner).claimed(45)).to.equal(false)
     })
   })
 
@@ -217,9 +223,11 @@ describe.only('NaturalFlavorFinder', () => {
       await NaturalFlavorsFinder.connect(claimer2).claim(49)
 
       const newOwner = await NaturalFlavors.connect(owner).ownerOf(49)
+      const isClaimed = await NaturalFlavorsFinder.connect(owner).claimed(49)
 
       expect(originalOwner).to.equal(NaturalFlavorsFinder.address)
       expect(newOwner).to.equal(claimer2.address)
+      expect(isClaimed).to.equal(true)
 
       console.log(
         await NaturalFlavorsFinder.connect(claimer2).hashClaimer('0x62bAA2E4d2d40ad3912c4AAA73E3d6A3D83b8DEB')
