@@ -88,21 +88,22 @@ const compareEndingSoon = (a, b) => {
 }
 
 const combineData = (localData, auctionData) => {
-  return localData.map(l => {
-    const matchingAuctionData = auctionData.find(a => a.tokenId === l.tokenId)
+  return localData
+  // .map(l => {
+  //   const matchingAuctionData = auctionData.find(a => a.tokenId === l.tokenId)
 
-    const auction = matchingAuctionData?.auctions?.[0] || {}
-    const currentBid = prettyNumber(auction.lastBidAmount)
-    const reservePrice = prettyNumber(auction.reservePrice)
+  //   const auction = matchingAuctionData?.auctions?.[0] || {}
+  //   const currentBid = prettyNumber(auction.lastBidAmount)
+  //   const reservePrice = prettyNumber(auction.reservePrice)
 
-    return {
-      ...l,
-      currentBid,
-      reservePrice,
-      endTime: auction.expiresAt && new Date(auction.expiresAt).getTime(),
-      status: auction.status
-    }
-  })
+  //   return {
+  //     ...l,
+  //     currentBid,
+  //     reservePrice,
+  //     endTime: auction.expiresAt && new Date(auction.expiresAt).getTime(),
+  //     status: auction.status
+  //   }
+  // })
 }
 
 
@@ -117,18 +118,18 @@ export default function Main() {
   const [gridSize, setGridSize] = useState(defaultGridSize)
   const [sortOrder, setSortOrder] = useState('endingSoon')
 
-  const { loading, error, data: apiData } = useQuery(AUCTION_QUERY, {
-    variables: {
-      contract: window.CONTRACT_ADDR
-    },
-  })
+  // const { loading, error, data: apiData } = useQuery(AUCTION_QUERY, {
+  //   variables: {
+  //     contract: window.CONTRACT_ADDR
+  //   },
+  // })
 
 
   // if (loading) return <h1 style={{ marginTop: '3em', textAlign: 'center'}}>Loading...</h1>
-  if (error) {
-    console.log(JSON.stringify(error))
-    return JSON.stringify(error)
-  }
+  // if (error) {
+  //   console.log(JSON.stringify(error))
+  //   return JSON.stringify(error)
+  // }
 
 
   const gridSizeClasses = {
@@ -139,7 +140,7 @@ export default function Main() {
   }
 
 
-  const filteredData = combineData(localTokenData, apiData?.Token || [])
+  const filteredData = localTokenData
     .filter(d => {
       if (selectedBrand && d.attributes.find(a => a.trait_type === 'Brand')?.value !== selectedBrand) return false
       if (selectedPacketState && d.attributes.find(a => a.trait_type === 'Packet State')?.value !== selectedPacketState) return false

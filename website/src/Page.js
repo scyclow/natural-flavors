@@ -29,14 +29,14 @@ const TOKEN_QUERY = gql`
 export default function Page() {
   const { id } = useParams()
   const _data = tokenData.find(d => d.tokenId === id)
-  const { loading, error, data: apiData } = useQuery(TOKEN_QUERY, {
-    variables: {
-      contract: window.CONTRACT_ADDR,
-      tokenId: id
-    },
-  })
+  // const { loading, error, data: apiData } = useQuery(TOKEN_QUERY, {
+  //   variables: {
+  //     contract: window.CONTRACT_ADDR,
+  //     tokenId: id
+  //   },
+  // })
 
-  const data = combineData(_data, apiData?.Token?.[0])
+  const data = combineData(_data)
 
   const { hours, minutes, seconds, expired } = useCountdown(data?.endTime)
 
